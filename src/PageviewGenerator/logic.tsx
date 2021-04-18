@@ -55,7 +55,7 @@ export const usePageviewGenerator = () => {
     setPageview(eventObj)
 
     // POST request to the API.
-    axios.post('http://13.234.120.153/api/events/', eventObj)
+    axios.post('https://www.zezaeventapp.ml/api/events/', eventObj)
   }
 
   return {

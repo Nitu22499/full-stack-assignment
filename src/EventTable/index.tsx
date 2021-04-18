@@ -8,7 +8,7 @@ export const EventTable = ({pageview}) => {
 
     useEffect(()=>{
         // On page load, make API call to fetch data and set on the table.
-        axios.get('http://13.234.120.153/api/events/')
+        axios.get('https://www.zezaeventapp.ml/api/events/')
         .then(res=>{
             setEvents(res.data)
         });

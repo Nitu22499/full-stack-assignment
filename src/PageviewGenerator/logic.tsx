@@ -1,3 +1,4 @@
+import axios from 'axios'
 import cuid from 'cuid'
 import { loremIpsum } from 'lorem-ipsum'
 import { useState } from 'react'
@@ -20,7 +21,7 @@ interface Pageview {
 }
 
 export const usePageviewGenerator = () => {
-  const [pageview, setPageview] = useState<Pageview | null>(null)
+  const [pageview, setPageview] = useState<any | null>(null)
 
   const generate = () => {
     const event: Pageview = {
@@ -41,7 +42,20 @@ export const usePageviewGenerator = () => {
       }
     }
 
-    setPageview(event)
+    const eventObj = {
+      "event_id": event.id,
+      "event_date": event.created_at.toISOString(),
+      "page_title": event.page.title,
+      "page_description": event.page.description,
+      "page_tags": event.page.tags.join(', '),
+      "user_id": event.user.id,
+      "user_joined": event.user.created_at.toISOString()
+    }
+
+    setPageview(eventObj)
+
+    // POST request to the API.
+    axios.post('http://13.234.120.153/api/events/', eventObj)
   }
 
   return {
